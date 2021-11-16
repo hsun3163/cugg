@@ -10,7 +10,7 @@
 
 ## Install
 
-`pip install LDtools`
+`pip install LDtoolsets`
 
 ## How to use
 
