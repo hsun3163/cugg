@@ -65,7 +65,8 @@ class Genodata:
         if geno_file.endswith('.bed'):
             return read_plink(geno_file[:-4], verbose=False)
         elif geno_file.endswith('.bgen'):
-            sample_file = geno_file.replace('.bgen', '.sample')
+            if sample_file is None:
+                sample_file = geno_file.replace('.bgen', '.sample')
             return read_bgen(geno_file,sample_file)
         else:
             raise ValueError('Plesae provide the genotype files with PLINK binary format or BGEN format')
