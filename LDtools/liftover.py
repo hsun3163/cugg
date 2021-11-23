@@ -70,8 +70,12 @@ class Liftover:
             ofile.close()
         ifile.close()
 
-    def region_liftover(self):
-        pass
+    def region_liftover(self,region):
+        imp_cs,imp_start = self.chrpos_liftover(region[0],region[1])
+        imp_ce,imp_end = self.chrpos_liftover(region[0],region[2])
+        if imp_cs !=imp_ce:
+            raise ValueError('After liftover, the region is not in the same chromosome anymore.')
+        return imp_cs,imp_start,imp_end
 
     def df_liftover(self):
         pass
