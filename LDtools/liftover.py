@@ -38,18 +38,18 @@ class Liftover:
     def bim_liftover(self,bim):
         new_bim = bim.copy()
         lchr,lpos = self.variants_liftover(bim.chrom,bim.pos)
-        new_bim.CHR =lchr
-        new_bim.POS = lpos
-        new_bim.SNP = 'chr'+new_bim[['chrom','pos','a0','a1']].agg(':'.join, axis=1)
+        new_bim.chrom =lchr
+        new_bim.pos = lpos
+        new_bim.snp = 'chr'+new_bim[['chrom','pos','a0','a1']].astype(str).agg(':'.join, axis=1)
         return new_bim
 
 
     def sumstat_liftover(self,ss):
         new_ss = ss.copy()
         lchr,lpos = self.variants_liftover(ss.CHR,ss.POS)
-        new_ss.chrom =lchr
-        new_ss.pos = lpos
-        new_ss.snp = 'chr'+new_ss[['CHR','POS','REF','ALT']].agg(':'.join, axis=1)
+        new_ss.CHR =lchr
+        new_ss.POS = lpos
+        new_ss.SNP = 'chr'+new_ss[['CHR','POS','REF','ALT']].astype(str).agg(':'.join, axis=1)
         return new_ss
 
     def vcf_liftover(self,vcf):
