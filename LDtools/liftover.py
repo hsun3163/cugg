@@ -25,6 +25,10 @@ class Liftover:
 
     def chrpos_liftover(self,chrom,pos):
         try:
+            if chrom == 'X':
+                chrom = 23
+            elif chrom =='Y':
+                chrom = 24
             new_c,new_p,_ = self.chainmap[int(chrom)][pos][0]
             return int(new_c[3:]),new_p
         except:
@@ -33,7 +37,7 @@ class Liftover:
         #The function to liftover bim
     def bim_liftover(self,bim):
         new_bim = bim.copy()
-        lchr,lpos = self.variants_liftover(bim.CHR,bim.POS)
+        lchr,lpos = self.variants_liftover(bim.chrom,bim.pos)
         new_bim.CHR =lchr
         new_bim.POS = lpos
         new_bim.SNP = 'chr'+new_bim[['chrom','pos','a0','a1']].agg(':'.join, axis=1)
@@ -42,7 +46,7 @@ class Liftover:
 
     def sumstat_liftover(self,ss):
         new_ss = ss.copy()
-        lchr,lpos = self.variants_liftover(ss.chrom,ss.pos)
+        lchr,lpos = self.variants_liftover(ss.CHR,ss.POS)
         new_ss.chrom =lchr
         new_ss.pos = lpos
         new_ss.snp = 'chr'+new_ss[['CHR','POS','REF','ALT']].agg(':'.join, axis=1)
@@ -57,7 +61,7 @@ class Liftover:
                         ofile.write(line)
                     else:
                         variant = [x for x in line.split('\t')]
-                        new_c,new_p = self.chrpos_liftover(int(variant[0]),int(variant[1]))
+                        new_c,new_p = self.chrpos_liftover(variant[0],int(variant[1]))
                         variant[0] = str(new_c)
                         variant[1] = str(new_p)
                         variant[2] = 'chr'+':'.join(variant[:2]+variant[3:5])
