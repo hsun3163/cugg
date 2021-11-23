@@ -52,8 +52,9 @@ class Liftover:
         new_ss.SNP = 'chr'+new_ss[['CHR','POS','REF','ALT']].astype(str).agg(':'.join, axis=1)
         return new_ss
 
-    def vcf_liftover(self,vcf):
-        vcf_out = vcf[:-7]+'_'+self.fr+'To'+self.to+vcf[-7:]
+    def vcf_liftover(self,vcf,vcf_out=None):
+        if vcf_out is None:
+            vcf_out = vcf[:-7]+'_'+self.fr+'To'+self.to+vcf[-7:]
         with gzip.open(vcf, 'rt') as ifile:
             with gzip.open(vcf_out,'wt') as ofile:
                 for line in ifile:
