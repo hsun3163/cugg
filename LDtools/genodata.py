@@ -20,7 +20,6 @@ def read_bgen(file, sample_file=None):
         aa1.append(a1)
         snp.append(':'.join(['chr'+str(int(c)),str(p),a0,a1]))  # '05' first change to int, then change to str
     bim = pd.DataFrame({'chrom':bg.chromosomes.astype(int),'snp':snp,'pos':bg.positions,'a0':aa0,'a1':aa1})
-    print(bim)
     if sample_file is None:
         fam = None
     else:
@@ -49,8 +48,11 @@ def extract_bed(geno,idx,row=True,step=500):  #row = True by variants, row = Fal
             geno = geno[:,idx]
     else:
         if row:
-            int_idx = list(idx[idx].index)
-            geno = bgen2dask(geno,int_idx,step)
+            #must be numric index
+            if type(list(idx)[0]) is bool:
+                pd_idx = pd.Series(idx)
+                idx = list(pd_idx[pd_idx].index)
+            geno = bgen2dask(geno,idx,step)
         else:
             geno = geno.read() # read all variants
             geno = geno[:,idx]
@@ -92,8 +94,7 @@ class Genodata:
         if sum(idx) == 0:
             raise ValueError('The extraction is empty')
         #update bim,bed
-        self.bim = bim[idx]
-        self.bed = extract_bed(self.bed,idx)
+        self.extractbyidx(idx,row=True)
 
     def extractbyvariants(self,variants,notin=False):  #variants is list or pd.Series
         idx = self.bim.snp.isin(variants)
@@ -102,8 +103,7 @@ class Genodata:
         if sum(idx) == 0:
             raise ValueError('The extraction is empty')
         #update bim,bed
-        self.bim = self.bim[idx]
-        self.bed = extract_bed(self.bed,idx)
+        self.extractbyidx(idx,row=True)
 
     def extractbysamples(self,samples,notin=False): #samples is list or pd.Series
         samples = pd.Series(samples,dtype=str)
@@ -113,5 +113,23 @@ class Genodata:
         if sum(idx) == 0:
             raise ValueError('The extraction is empty')
         #update fam,bed
-        self.fam = self.fam[idx]
-        self.bed = extract_bed(self.bed,idx,row=False)
+        self.extractbyidx(idx,row=False)
+
+    def extractbyidx(self,idx,row=True):
+        '''get subset of genodata by index
+        if index is numbers, the order of genodata will be sorted by the order of index.
+        if row = True, extract by variants. Otherwise, extract by samples.'''
+        idx = list(idx)
+        if row:
+            #update bim
+            if type(idx[0]) is bool:
+                self.bim = self.bim[idx]
+            else:
+                self.bim = self.bim.iloc[idx]
+        else:
+            #update fam
+            if type(idx[0]) is bool:
+                self.fam = self.fam[idx]
+            else:
+                self.fam = self.fam.iloc[idx]
+        self.bed = extract_bed(self.bed,idx,row)
