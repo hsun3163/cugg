@@ -3,6 +3,12 @@
 __all__ = ['geno_corr', 'dask_corr', 'dict2mat', 'dask_corr_pair', 'dict2mat_pair']
 
 # Cell
+import torch
+import numpy as np
+import pandas as pd
+import dask.array as da
+
+# Cell
 def geno_corr(x,y=None,step=100):
     '''functions to calculate LD matrix'''
     if y is None:
