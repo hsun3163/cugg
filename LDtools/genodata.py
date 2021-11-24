@@ -20,7 +20,10 @@ def read_bgen(file, sample_file=None):
         aa1.append(a1)
         snp.append(':'.join(['chr'+str(int(c)),str(p),a0,a1]))  # '05' first change to int, then change to str
     bim = pd.DataFrame({'chrom':bg.chromosomes.astype(int),'snp':snp,'pos':bg.positions,'a0':aa0,'a1':aa1})
-    if sample_file is not None:
+    print(bim)
+    if sample_file is None:
+        fam = None
+    else:
         fam = pd.read_csv(sample_file, header=0, delim_whitespace=True, quotechar='"',skiprows=1)
         fam.columns = ['fid','iid','missing','sex']
         fam = fam
@@ -86,6 +89,8 @@ class Genodata:
     def extractbyregion(self,region):
         bim = self.bim
         idx = (bim.chrom == region[0]) & (bim.pos >= region[1]) & (bim.pos <= region[2])
+        if sum(idx) == 0:
+            raise ValueError('The extraction is empty')
         #update bim,bed
         self.bim = bim[idx]
         self.bed = extract_bed(self.bed,idx)
@@ -94,6 +99,8 @@ class Genodata:
         idx = self.bim.snp.isin(variants)
         if notin:
             idx = idx == False
+        if sum(idx) == 0:
+            raise ValueError('The extraction is empty')
         #update bim,bed
         self.bim = self.bim[idx]
         self.bed = extract_bed(self.bed,idx)
@@ -103,6 +110,8 @@ class Genodata:
         idx = self.fam.iid.astype(str).isin(samples)
         if notin:
             idx = idx == False
+        if sum(idx) == 0:
+            raise ValueError('The extraction is empty')
         #update fam,bed
         self.fam = self.fam[idx]
         self.bed = extract_bed(self.bed,idx,row=False)
