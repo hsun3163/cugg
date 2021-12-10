@@ -6,6 +6,7 @@ __all__ = ['p2z', 'Sumstat']
 import numpy as np
 import pandas as pd
 from scipy.stats import norm
+from .utils import *
 
 # Cell
 def p2z(pval,beta,twoside=True):
@@ -56,4 +57,7 @@ class Sumstat:
 
     def calculateZ(self):
         self.ss['Z'] = list(p2z(self.ss.P,self.ss.BETA))
+
+    def match_ss(self,bim):
+        self.ss = check_ss(self.ss,bim)
 

@@ -98,13 +98,15 @@ class Genodata:
         if geno_file.endswith('.bed'):
             bim,fam,bed =  read_plink(geno_file[:-4], verbose=False)
             bim.snp = 'chr'+bim[['chrom','pos','a0','a1']].astype(str).agg(':'.join, axis=1)
-            return bim,fam,bed
         elif geno_file.endswith('.bgen'):
             if sample_file is None:
                 sample_file = geno_file.replace('.bgen', '.sample')
-            return read_bgen(geno_file,sample_file)
+            bim,fam,bed = read_bgen(geno_file,sample_file)
         else:
             raise ValueError('Plesae provide the genotype files with PLINK binary format or BGEN format')
+        bim.chrom = bim.chrom.astype(int)
+        bim.pos = bim.pos.astype(int)
+        return bim,fam,bed
 
 
     def geno_in_stat(self,stat,notin=False):
@@ -121,6 +123,7 @@ class Genodata:
     def extractbyregion(self,region):
         bim = self.bim
         idx = (bim.chrom == region[0]) & (bim.pos >= region[1]) & (bim.pos <= region[2])
+        print('this region',region,'has',sum(idx),'SNPs')
         if sum(idx) == 0:
             raise ValueError('The extraction is empty')
         #update bim,bed

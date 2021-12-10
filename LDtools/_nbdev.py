@@ -4,6 +4,7 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"read_bgen": "00_Genodata.ipynb",
          "bgen2dask": "00_Genodata.ipynb",
+         "pybgen_region": "00_Genodata.ipynb",
          "extract_bed": "00_Genodata.ipynb",
          "Genodata": "00_Genodata.ipynb",
          "p2z": "01_Sumstat.ipynb",
@@ -13,12 +14,16 @@ index = {"read_bgen": "00_Genodata.ipynb",
          "dask_corr": "03_LDmatrix.ipynb",
          "dict2mat": "03_LDmatrix.ipynb",
          "dask_corr_pair": "03_LDmatrix.ipynb",
-         "dict2mat_pair": "03_LDmatrix.ipynb"}
+         "dict2mat_pair": "03_LDmatrix.ipynb",
+         "shorten_id": "04_Utils.ipynb",
+         "match_ss_with_bim": "06_SNPmatch.ipynb",
+         "check_ss": "06_SNPmatch.ipynb"}
 
 modules = ["genodata.py",
            "sumstat.py",
            "liftover.py",
-           "ldmatrix.py"]
+           "ldmatrix.py",
+           "utils.py"]
 
 doc_url = "https://changebio.github.io/LDtools/"
 

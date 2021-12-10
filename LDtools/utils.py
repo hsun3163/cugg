@@ -10,6 +10,10 @@ def shorten_id(x):
     return x if len(x) < 30 else f"{x.split('_')[0]}_{xxh(x).hexdigest()}"
 
 # Cell
+import pandas as pd
+import numpy as np
+
+# Cell
 def match_ss_with_bim(query,subject):
     '''snp match case in one dataset'''
     query = query.itertuples()
@@ -37,7 +41,8 @@ def match_ss_with_bim(query,subject):
                 elif qi.ALT == si.a0 and qi.REF == si.a1:
                     flip.append(True)
                 else:
-                    raise Exception(qi,'is not in genodata')
+                    si = next(subject,None)
+                    continue
                 qi = next(query,None)
                 si = next(subject,None)
     return flip
@@ -48,11 +53,13 @@ def check_ss(ss,bim):
     bim.chrom = bim.chrom.astype(int)
     flip = np.array(match_ss_with_bim(ss,bim))
     #shift ref and alt for fliped snps and change snp's name and the sign of beta
-    fss = ss[flip]
-    ref = fss.ALT.copy()
-    alt = fss.REF.copy()
-    fss.REF = ref
-    fss.ALT =alt
-    fss.SNP = 'chr'+fss[['CHR','POS','REF','ALT']].astype(str).agg(':'.join, axis=1)
-    fss.BETA = -fss.BETA
-    return pd.concat([ss[~flip],fss]).sort_index()
+    if flip.any():
+        fss = ss[flip]
+        ref = fss.ALT.copy()
+        alt = fss.REF.copy()
+        fss.REF = ref
+        fss.ALT =alt
+        fss.SNP = 'chr'+fss[['CHR','POS','REF','ALT']].astype(str).agg(':'.join, axis=1)
+        fss.BETA = -fss.BETA
+        ss = pd.concat([ss[~flip],fss]).sort_index()
+    return ss
