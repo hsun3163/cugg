@@ -96,7 +96,9 @@ class Genodata:
 
     def read_geno(self,geno_file,sample_file):
         if geno_file.endswith('.bed'):
-            return read_plink(geno_file[:-4], verbose=False)
+            bim,fam,bed =  read_plink(geno_file[:-4], verbose=False)
+            bim.snp = 'chr'+bim[['chrom','pos','a0','a1']].astype(str).agg(':'.join, axis=1)
+            return bim,fam,bed
         elif geno_file.endswith('.bgen'):
             if sample_file is None:
                 sample_file = geno_file.replace('.bgen', '.sample')
