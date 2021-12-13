@@ -17,7 +17,9 @@ index = {"read_bgen": "00_Genodata.ipynb",
          "dict2mat_pair": "03_LDmatrix.ipynb",
          "shorten_id": "04_Utils.ipynb",
          "match_ss_with_bim": "06_SNPmatch.ipynb",
-         "check_ss": "06_SNPmatch.ipynb"}
+         "check_ss": "06_SNPmatch.ipynb",
+         "compare_snps": "06_SNPmatch.ipynb",
+         "snp_match": "06_SNPmatch.ipynb"}
 
 modules = ["genodata.py",
            "sumstat.py",

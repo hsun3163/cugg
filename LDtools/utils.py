@@ -82,13 +82,13 @@ def compare_snps(query,subject):
         if qi[1]>si[1]:
             si = next(subject,None)
         elif qi[1]<si[1]:
-            smry.append([False]*6+[-1,-1])
+            smry.append([False]*6+[qi[0],-1])
             qi = next(query,None)
         else:
             if qi[2]>si[2]:
                 si = next(subject,None)
             elif qi[2]<si[2]:
-                smry.append([False]*6+[-1,-1])
+                smry.append([False]*6+[qi[0],-1])
                 qi = next(query,None)
             else:
                 #same pos has multiple snps

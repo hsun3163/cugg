@@ -123,7 +123,7 @@ class Genodata:
     def extractbyregion(self,region):
         bim = self.bim
         idx = (bim.chrom == region[0]) & (bim.pos >= region[1]) & (bim.pos <= region[2])
-        print('this region',region,'has',sum(idx),'SNPs')
+        print('this region',region,'has',sum(idx),'SNPs in Genodata')
         if sum(idx) == 0:
             raise ValueError('The extraction is empty')
         #update bim,bed

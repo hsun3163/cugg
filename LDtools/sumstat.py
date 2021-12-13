@@ -46,6 +46,7 @@ class Sumstat:
     def extractbyregion(self,region):
         sumstats = self.ss
         idx = (sumstats.CHR == region[0]) & (sumstats.POS >= region[1]) & (sumstats.POS <= region[2])
+        print('this region',region,'has',sum(idx),'SNPs in Sumstat')
         self.ss = sumstats[idx]
 
     def extractbyvariants(self,variants,notin=False):
