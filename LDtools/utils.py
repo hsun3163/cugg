@@ -106,7 +106,7 @@ def compare_snps(query,subject):
                     multi_snps = []
 
     while(qi):
-        smry.append([False]*6+[-1,-1])
+        smry.append([False]*6+[qi[0],-1])
         qi = next(query,None)
     smry = pd.DataFrame(smry,columns=['keep','exact','flip','reverse','both','complement','qidx','sidx'])
     print(smry.iloc[:,:6].value_counts())

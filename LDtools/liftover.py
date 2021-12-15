@@ -55,6 +55,7 @@ class Liftover:
     def vcf_liftover(self,vcf,vcf_out=None):
         if vcf_out is None:
             vcf_out = vcf[:-7]+'_'+self.fr+'To'+self.to+vcf[-7:]
+        count_fail,total= 0,0
         with gzip.open(vcf, 'rt') as ifile:
             with gzip.open(vcf_out,'wt') as ofile:
                 for line in ifile:
@@ -63,12 +64,16 @@ class Liftover:
                     else:
                         variant = [x for x in line.split('\t')]
                         new_c,new_p = self.chrpos_liftover(variant[0],int(variant[1]))
+                        if new_c == 0:
+                            count_fail +=1
+                        total +=1
                         variant[0] = str(new_c)
                         variant[1] = str(new_p)
                         variant[2] = 'chr'+':'.join(variant[:2]+variant[3:5])
                         ofile.write('\t'.join(variant))
             ofile.close()
         ifile.close()
+        print("Total number SNPs ",total,"The number of SNPs failed to liftover" count_fail)
 
     def region_liftover(self,region):
         imp_cs,imp_start = self.chrpos_liftover(region[0],region[1])
