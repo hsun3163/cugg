@@ -73,7 +73,7 @@ class Liftover:
                         ofile.write('\t'.join(variant))
             ofile.close()
         ifile.close()
-        print("Total number SNPs ",total,"The number of SNPs failed to liftover" count_fail)
+        print("Total number SNPs ",total,". The number of SNPs failed to liftover " count_fail)
 
     def region_liftover(self,region):
         imp_cs,imp_start = self.chrpos_liftover(region[0],region[1])
