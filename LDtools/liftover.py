@@ -25,11 +25,17 @@ class Liftover:
 
     def chrpos_liftover(self,chrom,pos):
         try:
-            if chrom == 'X':
-                chrom = 23
-            elif chrom =='Y':
-                chrom = 24
-            new_c,new_p,_ = self.chainmap[int(chrom)][pos][0]
+            if str(chrom) in ['X','chrX','23']:
+                new_c,new_p,_ = self.chainmap['X'][pos][0]
+                return 23,new_p
+            elif str(chrom) in ['Y','chrY','24']:
+                new_c,new_p,_ = self.chainmap['Y'][pos][0]
+                return 24,new_p
+            elif str(chrom) in ['M','chrM','25']:
+                new_c,new_p,_ = self.chainmap['M'][pos][0]
+                return 25,new_p
+            else:
+                new_c,new_p,_ = self.chainmap[int(chrom)][pos][0]
             return int(new_c[3:]),new_p
         except:
             return 0,0
@@ -52,7 +58,7 @@ class Liftover:
         new_ss.SNP = 'chr'+new_ss[['CHR','POS','REF','ALT']].astype(str).agg(':'.join, axis=1)
         return new_ss
 
-    def vcf_liftover(self,vcf,vcf_out=None):
+    def vcf_liftover(self,vcf,vcf_out=None,remove_missing = True):
         if vcf_out is None:
             vcf_out = vcf[:-7]+'_'+self.fr+'To'+self.to+vcf[-7:]
         count_fail,total= 0,0
@@ -64,16 +70,18 @@ class Liftover:
                     else:
                         variant = [x for x in line.split('\t')]
                         new_c,new_p = self.chrpos_liftover(variant[0],int(variant[1]))
+                        total +=1
                         if new_c == 0:
                             count_fail +=1
-                        total +=1
+                            if remove_missing:
+                                continue
                         variant[0] = str(new_c)
                         variant[1] = str(new_p)
                         variant[2] = 'chr'+':'.join(variant[:2]+variant[3:5])
                         ofile.write('\t'.join(variant))
             ofile.close()
         ifile.close()
-        print("Total number SNPs ",total,". The number of SNPs failed to liftover " count_fail)
+        print("Total number SNPs ",total,". The number of SNPs failed to liftover ", count_fail)
 
     def region_liftover(self,region):
         imp_cs,imp_start = self.chrpos_liftover(region[0],region[1])
