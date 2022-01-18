@@ -3,6 +3,7 @@
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"read_bgen": "00_Genodata.ipynb",
+         "read_bim": "00_Genodata.ipynb",
          "bgen2dask": "00_Genodata.ipynb",
          "pybgen_region": "00_Genodata.ipynb",
          "extract_bed": "00_Genodata.ipynb",
@@ -23,7 +24,11 @@ index = {"read_bgen": "00_Genodata.ipynb",
          "match_ss_with_bim": "06_SNPmatch.ipynb",
          "check_ss": "06_SNPmatch.ipynb",
          "compare_snps": "06_SNPmatch.ipynb",
-         "snp_match": "06_SNPmatch.ipynb"}
+         "snp_match": "06_SNPmatch.ipynb",
+         "check_ss1": "06_SNPmatch.ipynb",
+         "pair_match": "06_SNPmatch.ipynb",
+         "strand_flip": "06_SNPmatch.ipynb",
+         "namebyordabc": "06_SNPmatch.ipynb"}
 
 modules = ["genodata.py",
            "sumstat.py",

@@ -60,5 +60,5 @@ class Sumstat:
         self.ss['Z'] = list(p2z(self.ss.P,self.ss.BETA))
 
     def match_ss(self,bim):
-        self.ss = check_ss(self.ss,bim)
+        self.ss = check_ss1(self.ss,bim)
 

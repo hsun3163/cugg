@@ -31,7 +31,7 @@ class Liftover:
             elif str(chrom) in ['Y','chrY','24']:
                 new_c,new_p,_ = self.chainmap['Y'][pos][0]
                 return 24,new_p
-            elif str(chrom) in ['M','chrM','25']:
+            elif str(chrom) in ['M','chrM','25','MT']:
                 new_c,new_p,_ = self.chainmap['M'][pos][0]
                 return 25,new_p
             else:
