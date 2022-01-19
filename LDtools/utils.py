@@ -148,8 +148,10 @@ def check_ss1(ss,bim,keep_ambiguous=True):
     if(bim.index.duplicated().any() or ss.index.duplicated().any()):
         warnings.warn("There are SNPs: REF:ALT = ALT:REF. They will be removed")
         bim = bim[~bim.index.duplicated(keep=False)]
-        bim = bim[bim.index.isin(ss.index)]
-        ss = ss.loc[bim.index]
+    bim = bim[bim.index.isin(ss.index)]
+    ss = ss.loc[bim.index]
+    if(ss.shape[0]!=bim.shape[0]):
+        raise Exception("Sumstas and genotype are not match with each other.")
     print("Paired SNPs",ss.shape[0])
     #input paired ss and bim
     pm = pair_match(ss.REF,ss.ALT,bim.a0,bim.a1)
