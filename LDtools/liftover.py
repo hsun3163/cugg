@@ -50,12 +50,13 @@ class Liftover:
         return new_bim
 
 
-    def sumstat_liftover(self,ss):
+    def sumstat_liftover(self,ss,rename=True):
         new_ss = ss.copy()
         lchr,lpos = self.variants_liftover(ss.CHR,ss.POS)
         new_ss.CHR =lchr
         new_ss.POS = lpos
-        new_ss.SNP = 'chr'+new_ss[['CHR','POS','REF','ALT']].astype(str).agg(':'.join, axis=1)
+        if rename:
+            new_ss.SNP = 'chr'+new_ss[['CHR','POS','REF','ALT']].astype(str).agg(':'.join, axis=1)
         return new_ss
 
     def vcf_liftover(self,vcf,vcf_out=None,remove_missing = True):

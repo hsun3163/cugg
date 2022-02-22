@@ -19,17 +19,17 @@ def p2z(pval,beta,twoside=True):
     return z
 
 class Sumstat:
-    def __init__(self,sumstat_path,config_file=None):
-        self.ss = self.read_sumstat(sumstat_path,config_file)
+    def __init__(self,sumstat_path,config_file=None,rename=True):
+        self.ss = self.read_sumstat(sumstat_path,config_file,rename)
 
     def __repr__(self):
         return "sumstat:% s" % (self.ss)
 
         #functions to read sumstats
-    def read_sumstat(self,file, config_file):
+    def read_sumstat(self,file, config_file,rename):
         if config_file is not None:
             config_file = yaml.safe_load(open(config_file, 'r'))
-        return read_sumstat(file,config_file)
+        return read_sumstat(file,config_file,rename)
 
     def extractbyregion(self,region):
         sumstats = self.ss
@@ -53,7 +53,7 @@ class Sumstat:
 
 
 # Cell
-def read_sumstat(file, config):
+def read_sumstat(file, config,rename=True):
     try:
         sumstats = pd.read_csv(file, compression='gzip', header=0, sep='\t', quotechar='"')
     except:
@@ -67,7 +67,8 @@ def read_sumstat(file, config):
         except:
             raise ValueError(f'According to config_file, input summary statistics should have the following columns: %s' % list(config.values()))
         sumstats.columns = list(config.keys())
-    sumstats.SNP = 'chr'+sumstats.CHR.astype(str) + ':' + sumstats.POS.astype(str) + ':' + sumstats.A0.astype(str) + ':' + sumstats.A1.astype(str)
+    if rename:
+        sumstats.SNP = 'chr'+sumstats.CHR.astype(str) + ':' + sumstats.POS.astype(str) + ':' + sumstats.A0.astype(str) + ':' + sumstats.A1.astype(str)
     sumstats.CHR = sumstats.CHR.astype(int)
     sumstats.POS = sumstats.POS.astype(int)
     return sumstats
