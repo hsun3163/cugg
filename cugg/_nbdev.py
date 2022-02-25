@@ -43,8 +43,8 @@ modules = ["genodata.py",
            "ldmatrix.py",
            "utils.py"]
 
-doc_url = "https://changebio.github.io/LDtools/"
+doc_url = "https://changebio.github.io/cugg/"
 
-git_url = "https://github.com/changebio/LDtools/tree/master/"
+git_url = "https://github.com/changebio/cugg/tree/master/"
 
 def custom_doc_links(name): return None

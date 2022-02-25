@@ -56,7 +56,7 @@ class Liftover:
         new_ss.CHR =lchr
         new_ss.POS = lpos
         if rename:
-            new_ss.SNP = 'chr'+new_ss[['CHR','POS','REF','ALT']].astype(str).agg(':'.join, axis=1)
+            new_ss.SNP = 'chr'+new_ss[['CHR','POS','A0','A1']].astype(str).agg(':'.join, axis=1)
         return new_ss
 
     def vcf_liftover(self,vcf,vcf_out=None,remove_missing = True):

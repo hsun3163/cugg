@@ -10,7 +10,7 @@
 
 ## Install
 
-`pip install LDtoolsets`
+`pip install cugg`
 
 ## How to use
 

@@ -47,7 +47,7 @@ nb_path: "nbs/02_Liftover.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Liftover" class="doc_header"><code>class</code> <code>Liftover</code><a href="https://github.com/changebio/LDtools/tree/master/LDtools/liftover.py#L10" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Liftover</code>(<strong><code>fr</code></strong>=<em><code>'hg19'</code></em>, <strong><code>to</code></strong>=<em><code>'hg38'</code></em>)</p>
+<h2 id="Liftover" class="doc_header"><code>class</code> <code>Liftover</code><a href="https://github.com/changebio/cugg/tree/master/cugg/liftover.py#L10" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Liftover</code>(<strong><code>fr</code></strong>=<em><code>'hg19'</code></em>, <strong><code>to</code></strong>=<em><code>'hg38'</code></em>)</p>
 </blockquote>
 
 </div>
@@ -108,9 +108,9 @@ nb_path: "nbs/02_Liftover.ipynb"
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">LDtools.genodata</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">LDtools.sumstat</span> <span class="kn">import</span> <span class="n">Sumstat</span>
-<span class="kn">from</span> <span class="nn">LDtools.liftover</span> <span class="kn">import</span> <span class="n">Liftover</span>
+<span class="kn">from</span> <span class="nn">cugg.genodata</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">cugg.sumstat</span> <span class="kn">import</span> <span class="n">Sumstat</span>
+<span class="kn">from</span> <span class="nn">cugg.liftover</span> <span class="kn">import</span> <span class="n">Liftover</span>
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">input_path</span><span class="p">,</span><span class="n">output_path</span><span class="p">,</span><span class="n">fr</span><span class="o">=</span><span class="s1">&#39;hg19&#39;</span><span class="p">,</span><span class="n">to</span><span class="o">=</span><span class="s1">&#39;hg38&#39;</span><span class="p">,</span><span class="n">remove_missing</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">rename</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="n">lf</span> <span class="o">=</span> <span class="n">Liftover</span><span class="p">(</span><span class="n">fr</span><span class="p">,</span><span class="n">to</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;liftover from &quot;</span> <span class="o">+</span> <span class="n">fr</span> <span class="o">+</span><span class="s2">&quot;to&quot;</span> <span class="o">+</span><span class="n">to</span><span class="p">)</span>
@@ -474,7 +474,7 @@ Total number SNPs  93816694 . The number of SNPs failed to liftover  59995
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">LDtools.genodata</span> <span class="kn">import</span> <span class="n">Genodata</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">cugg.genodata</span> <span class="kn">import</span> <span class="n">Genodata</span>
 </pre></div>
 
     </div>
@@ -495,81 +495,6 @@ Total number SNPs  93816694 . The number of SNPs failed to liftover  59995
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">OSError</span>                                   Traceback (most recent call last)
-<span class="ansi-green-fg">/tmp/2206559.1.plot.q/ipykernel_14505/1401600537.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>geno <span class="ansi-blue-fg">=</span> Genodata<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;/mnt/mfs/statgen/alzheimers-family/linkage_files/geno/full_sample/bfiles/full_sample.bed&#39;</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">/mnt/mfs/statgen/yin/Github/LDtools/LDtools/genodata.py</span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, geno_path, sample_path)</span>
-<span class="ansi-green-intense-fg ansi-bold">    108</span> <span class="ansi-green-fg">class</span> Genodata<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    109</span>     <span class="ansi-green-fg">def</span> __init__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span>geno_path<span class="ansi-blue-fg">,</span>sample_path<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 110</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>bim<span class="ansi-blue-fg">,</span>self<span class="ansi-blue-fg">.</span>fam<span class="ansi-blue-fg">,</span>self<span class="ansi-blue-fg">.</span>bed <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>read_geno<span class="ansi-blue-fg">(</span>geno_path<span class="ansi-blue-fg">,</span>sample_path<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    111</span> 
-<span class="ansi-green-intense-fg ansi-bold">    112</span>     <span class="ansi-green-fg">def</span> __repr__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">/mnt/mfs/statgen/yin/Github/LDtools/LDtools/genodata.py</span> in <span class="ansi-cyan-fg">read_geno</span><span class="ansi-blue-fg">(self, geno_file, sample_file)</span>
-<span class="ansi-green-intense-fg ansi-bold">    115</span>     <span class="ansi-green-fg">def</span> read_geno<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span>geno_file<span class="ansi-blue-fg">,</span>sample_file<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    116</span>         <span class="ansi-green-fg">if</span> geno_file<span class="ansi-blue-fg">.</span>endswith<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;.bed&#39;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 117</span><span class="ansi-red-fg">             </span>bim<span class="ansi-blue-fg">,</span>fam<span class="ansi-blue-fg">,</span>bed <span class="ansi-blue-fg">=</span>  read_plink<span class="ansi-blue-fg">(</span>geno_file<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">:</span><span class="ansi-blue-fg">-</span><span class="ansi-cyan-fg">4</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> verbose<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    118</span>             bim<span class="ansi-blue-fg">.</span>snp <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#39;chr&#39;</span><span class="ansi-blue-fg">+</span>bim<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;chrom&#39;</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">&#39;pos&#39;</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">&#39;a0&#39;</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">&#39;a1&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">.</span>astype<span class="ansi-blue-fg">(</span>str<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>agg<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;:&#39;</span><span class="ansi-blue-fg">.</span>join<span class="ansi-blue-fg">,</span> axis<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    119</span>         <span class="ansi-green-fg">elif</span> geno_file<span class="ansi-blue-fg">.</span>endswith<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;.bgen&#39;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">~/miniconda3/lib/python3.8/site-packages/pandas_plink/_read.py</span> in <span class="ansi-cyan-fg">read_plink</span><span class="ansi-blue-fg">(file_prefix, verbose)</span>
-<span class="ansi-green-intense-fg ansi-bold">    120</span> 
-<span class="ansi-green-intense-fg ansi-bold">    121</span>     ref <span class="ansi-blue-fg">=</span> Allele<span class="ansi-blue-fg">.</span>a1
-<span class="ansi-green-fg">--&gt; 122</span><span class="ansi-red-fg">     bed = _read_file(
-</span><span class="ansi-green-intense-fg ansi-bold">    123</span>         fn<span class="ansi-blue-fg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">    124</span>         <span class="ansi-green-fg">lambda</span> f<span class="ansi-blue-fg">:</span> _read_bed<span class="ansi-blue-fg">(</span>f<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;bed&#34;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> nsamples<span class="ansi-blue-fg">,</span> nmarkers<span class="ansi-blue-fg">[</span>f<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;bed&#34;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> ref<span class="ansi-blue-fg">,</span> Chunk<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>T<span class="ansi-blue-fg">,</span>
-
-<span class="ansi-green-fg">~/miniconda3/lib/python3.8/site-packages/pandas_plink/_read.py</span> in <span class="ansi-cyan-fg">_read_file</span><span class="ansi-blue-fg">(fn, read_func, pbar)</span>
-<span class="ansi-green-intense-fg ansi-bold">    329</span>     data <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">]</span>
-<span class="ansi-green-intense-fg ansi-bold">    330</span>     <span class="ansi-green-fg">for</span> f <span class="ansi-green-fg">in</span> fn<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 331</span><span class="ansi-red-fg">         </span>data<span class="ansi-blue-fg">.</span>append<span class="ansi-blue-fg">(</span>read_func<span class="ansi-blue-fg">(</span>f<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    332</span>         pbar<span class="ansi-blue-fg">.</span>update<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    333</span>     <span class="ansi-green-fg">return</span> data
-
-<span class="ansi-green-fg">~/miniconda3/lib/python3.8/site-packages/pandas_plink/_read.py</span> in <span class="ansi-cyan-fg">&lt;lambda&gt;</span><span class="ansi-blue-fg">(f)</span>
-<span class="ansi-green-intense-fg ansi-bold">    122</span>     bed = _read_file(
-<span class="ansi-green-intense-fg ansi-bold">    123</span>         fn<span class="ansi-blue-fg">,</span>
-<span class="ansi-green-fg">--&gt; 124</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">lambda</span> f<span class="ansi-blue-fg">:</span> _read_bed<span class="ansi-blue-fg">(</span>f<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;bed&#34;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> nsamples<span class="ansi-blue-fg">,</span> nmarkers<span class="ansi-blue-fg">[</span>f<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;bed&#34;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> ref<span class="ansi-blue-fg">,</span> Chunk<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>T<span class="ansi-blue-fg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">    125</span>         pbar<span class="ansi-blue-fg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">    126</span>     )
-
-<span class="ansi-green-fg">~/miniconda3/lib/python3.8/site-packages/pandas_plink/_read.py</span> in <span class="ansi-cyan-fg">_read_bed</span><span class="ansi-blue-fg">(fn, nsamples, nvariants, ref, chunk)</span>
-<span class="ansi-green-intense-fg ansi-bold">    411</span>     col_chunk <span class="ansi-blue-fg">=</span> max<span class="ansi-blue-fg">(</span>ncols <span class="ansi-blue-fg">//</span> max_npartitions<span class="ansi-blue-fg">,</span> col_chunk<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    412</span> 
-<span class="ansi-green-fg">--&gt; 413</span><span class="ansi-red-fg">     </span>G <span class="ansi-blue-fg">=</span> read_bed<span class="ansi-blue-fg">(</span>fn<span class="ansi-blue-fg">,</span> nrows<span class="ansi-blue-fg">,</span> ncols<span class="ansi-blue-fg">,</span> row_chunk<span class="ansi-blue-fg">,</span> col_chunk<span class="ansi-blue-fg">,</span> ref<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    414</span>     <span class="ansi-green-fg">if</span> major <span class="ansi-blue-fg">==</span> <span class="ansi-blue-fg">&#34;variant&#34;</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    415</span>         G <span class="ansi-blue-fg">=</span> G<span class="ansi-blue-fg">.</span>T
-
-<span class="ansi-green-fg">~/miniconda3/lib/python3.8/site-packages/pandas_plink/_bed_read.py</span> in <span class="ansi-cyan-fg">read_bed</span><span class="ansi-blue-fg">(filepath, nrows, ncols, row_chunk, col_chunk, ref)</span>
-<span class="ansi-green-intense-fg ansi-bold">     22</span>     row_size <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">(</span>ncols <span class="ansi-blue-fg">+</span> <span class="ansi-cyan-fg">3</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">//</span> <span class="ansi-cyan-fg">4</span>
-<span class="ansi-green-intense-fg ansi-bold">     23</span>     size <span class="ansi-blue-fg">=</span> nrows <span class="ansi-blue-fg">*</span> row_size
-<span class="ansi-green-fg">---&gt; 24</span><span class="ansi-red-fg">     </span>buff <span class="ansi-blue-fg">=</span> memmap<span class="ansi-blue-fg">(</span>filepath<span class="ansi-blue-fg">,</span> uint8<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#34;r&#34;</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">3</span><span class="ansi-blue-fg">,</span> shape<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">(</span>size<span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     25</span>     row_start <span class="ansi-blue-fg">=</span> <span class="ansi-cyan-fg">0</span>
-<span class="ansi-green-intense-fg ansi-bold">     26</span>     col_xs <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">]</span>
-
-<span class="ansi-green-fg">~/miniconda3/lib/python3.8/site-packages/numpy/core/memmap.py</span> in <span class="ansi-cyan-fg">__new__</span><span class="ansi-blue-fg">(subtype, filename, dtype, mode, offset, shape, order)</span>
-<span class="ansi-green-intense-fg ansi-bold">    265</span>             bytes <span class="ansi-blue-fg">-=</span> start
-<span class="ansi-green-intense-fg ansi-bold">    266</span>             array_offset <span class="ansi-blue-fg">=</span> offset <span class="ansi-blue-fg">-</span> start
-<span class="ansi-green-fg">--&gt; 267</span><span class="ansi-red-fg">             </span>mm <span class="ansi-blue-fg">=</span> mmap<span class="ansi-blue-fg">.</span>mmap<span class="ansi-blue-fg">(</span>fid<span class="ansi-blue-fg">.</span>fileno<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> bytes<span class="ansi-blue-fg">,</span> access<span class="ansi-blue-fg">=</span>acc<span class="ansi-blue-fg">,</span> offset<span class="ansi-blue-fg">=</span>start<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    268</span> 
-<span class="ansi-green-intense-fg ansi-bold">    269</span>             self = ndarray.__new__(subtype, shape, dtype=descr, buffer=mm,
-
-<span class="ansi-red-fg">OSError</span>: [Errno 12] Cannot allocate memory</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -604,62 +529,6 @@ Total number SNPs  93816694 . The number of SNPs failed to liftover  59995
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>liftover from hg19tohg38
-Removing SNPs failed to liftover is True
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/mnt/mfs/statgen/yin/Github/LDtools/LDtools/genodata.py:83: PerformanceWarning: Slicing is producing a large chunk. To accept the large
-chunk and silence this warning, set the option
-    &gt;&gt;&gt; with dask.config.set(**{&#39;array.slicing.split_large_chunks&#39;: False}):
-    ...     array[indexer]
-
-To avoid creating the large chunks, set the option
-    &gt;&gt;&gt; with dask.config.set(**{&#39;array.slicing.split_large_chunks&#39;: True}):
-    ...     array[indexer]
-  geno = geno[idx,:]
-Writing BED: 100%|██████████| 1/1 [00:15&lt;00:00, 15.11s/it]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Writing FAM... </pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>done.
-Writing BIM... done.
-Total number SNPs  1413 . Removing SNPs failed to liftover  0
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -846,8 +715,8 @@ Writing BIM... done.
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">LDtools.sumstat</span> <span class="kn">import</span> <span class="n">Sumstat</span>
-<span class="kn">from</span> <span class="nn">LDtools.liftover</span> <span class="kn">import</span> <span class="n">Liftover</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">cugg.sumstat</span> <span class="kn">import</span> <span class="n">Sumstat</span>
+<span class="kn">from</span> <span class="nn">cugg.liftover</span> <span class="kn">import</span> <span class="n">Liftover</span>
 <span class="k">def</span> <span class="nf">gwas_liftover</span><span class="p">(</span><span class="n">input_path</span><span class="p">,</span><span class="n">output_path</span><span class="p">,</span><span class="n">output_unmapped</span><span class="p">,</span><span class="n">output_mapped</span><span class="p">,</span><span class="n">fr</span><span class="o">=</span><span class="s1">&#39;hg19&#39;</span><span class="p">,</span><span class="n">to</span><span class="o">=</span><span class="s1">&#39;hg38&#39;</span><span class="p">,</span><span class="n">remove_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="n">lf</span> <span class="o">=</span> <span class="n">Liftover</span><span class="p">(</span><span class="n">fr</span><span class="p">,</span><span class="n">to</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;reading GWAS sumstat&quot;</span><span class="p">)</span>
