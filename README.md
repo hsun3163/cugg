@@ -1,4 +1,4 @@
-# Collection of (in-house) Python utilities from Gao Wang's Group
+# In-house Python utilities from Gao Wang's group
 
 
 
