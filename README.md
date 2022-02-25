@@ -1,12 +1,14 @@
-# Scalable pipeline for computing LD matrix in big sample phenotype
+# Collection of (in-house) Python utilities from Gao Wang's Group
 
 
 
-### 4 modules
+## 4 modules
+
 - Genodata
 - Sumstats
 - Liftover
-- LDmatrix
+- LDmatrix: Scalable pipeline for computing LD matrix in big sample phenotype
+
 
 ## Install
 
