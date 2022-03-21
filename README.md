@@ -186,4 +186,6 @@ main(region,geno_path,sumstats_path,pheno_path,unr_path,imp_geno_path,imp_sumsta
 
 
     4. Output sumstats and LD matrix
-
+## For developer:
+    1. Make changes in the notebooks in the nbs
+    2. Convert the notebook to py script by `nbdev_build_lib && nbdev_clean_nbs && nbdev_build_docs`, after `pip install -U nbdev`
