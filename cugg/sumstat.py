@@ -82,18 +82,29 @@ def ss_2_vcf(ss_df,name = "name"):
     df['QUAL'] = "."
     df['FILTER'] = "PASS"
     df['INFO'] = "."
+    fix_header = ["SNP","A1","A0","POS","CHR","STAT","SE","P"]
     if "GENE" in ss_df.columns:
         df['INFO'] = "GENE = " + ss_df["GENE"]
-    ### FIXME: Need a way to customize the headers based on format field
+        fix_header = ["GENE","SNP","A1","A0","POS","CHR","STAT","SE","P"]
+    ### Fix headers
+    import time
     header = '##fileformat=VCFv4.2\n' + \
     '##FILTER=<ID=PASS,Description="All filters passed">\n' + \
-    '##fileDate=${time.strftime("%Y%m%d",time.localtime())}\n'+ \
+    f'##fileDate={time.strftime("%Y%m%d",time.localtime())}\n'+ \
     '##FORMAT=<ID=ES,Number=A,Type=Float,Description="Effect size estimate relative to the alternative allele">\n' + \
     '##FORMAT=<ID=SE,Number=A,Type=Float,Description="Standard error of effect size estimate">\n' + \
     '##FORMAT=<ID=P,Number=A,Type=Float,Description="The Pvalue corresponding to ES">\n'
+    ### Customized Field headers
+    header_list = []
+    for x in test:
+        if x not in fix_header:
+            Prefix = f'##FORMAT=<ID={x},Number=A,Type='
+            Type = str(type(test[x][0])).replace("<class \'","").replace("'>","").replace("numpy.","").replace("64","").capitalize()
+            Surfix = f',Description="Customized Field {x}'
+            header_list.append(Prefix+Type+Surfix)
     ## format and sample field
-    df['FORMAT'] = ":".join(ss_df[["STAT","SE","P"]].columns.values.tolist())
-    df[f'{name}'] = ss_df['STAT'].astype(str) + ":" + ss_df['SE'].astype(str) + ":" + ss_df['P'].astype(str)
+    df['FORMAT'] = ":".join(["STAT","SE","P"] + ss_df.drop(fix_header,axis = 1).columns.values.tolist())
+    df[f'{name}'] = ss_df['STAT'].astype(str) + ":" + ss_df['SE'].astype(str) + ":" + ss_df['P'].astype(str) + ss_df.drop(fix_header,axis = 1).astype(str).apply(":".join,axis = 1)
     ## Rearrangment
     df = df[['#CHROM', 'POS', 'ID', 'REF', 'ALT', 'QUAL', 'FILTER', 'INFO','FORMAT',f'{name}']]
     return df,header
