@@ -1,4 +1,4 @@
-# Scalable pipeline for computing LD matrix in big sample phenotype
+# In-house Python utilities from Gao Wang's group
 
 
 
