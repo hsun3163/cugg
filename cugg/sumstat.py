@@ -116,5 +116,5 @@ def ss_2_vcf(ss_df,name = "name"):
     ## Rearrangment
     df = df[['#CHROM', 'POS', 'ID', 'REF', 'ALT', 'QUAL', 'FILTER', 'INFO','FORMAT',f'{name}']]
     # Add headers
-    header = header + "\n".join(header_list) + "\n"
+    header = header + "\n" + "\n".join(header_list) + "\n"
     return df,header
